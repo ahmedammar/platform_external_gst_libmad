@@ -149,5 +149,6 @@ libmad-Android.mk: Makefile.am mad.h
 	 -:CFLAGS $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	 -:LDFLAGS $(libmad_la_LDFLAGS) \
 	           $(libmad_la_LIBADD) \
+	 -:HEADERS $(include_HEADERS) \
 	 -:PASSTHROUGH LOCAL_ARM_MODE:=arm \
 	> $@
