@@ -138,3 +138,16 @@ again:
 	$(MAKE)
 
 .PHONY: again
+
+libmad-Android.mk: Makefile.am mad.h
+	androgenizer \
+	-:PROJECT libmad -:SHARED libmad \
+	 -:TAGS optional \
+         -:REL_TOP $(top_srcdir) -:ABS_TOP $(abs_top_srcdir) \
+	 -:SOURCES $(libmad_la_SOURCES) \
+	 	   $(EXTRA_libmad_la_SOURCES) \
+	 -:CFLAGS $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	 -:LDFLAGS $(libmad_la_LDFLAGS) \
+	           $(libmad_la_LIBADD) \
+	 -:PASSTHROUGH LOCAL_ARM_MODE:=arm \
+	> $@
