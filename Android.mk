@@ -8,9 +8,9 @@ mad_TOP := $(LOCAL_PATH)
 MAD_BUILT_SOURCES := 		\
 	libmad-Android.mk
 
-ABS_MAD_BUILT_SOURCES := $(patsubst %, $(mad_TOP)/%, $(MAD_BUILT_SOURCES))
+MAD_BUILT_SOURCES := $(patsubst %, $(mad_TOP)/%, $(MAD_BUILT_SOURCES))
 
-.PHONY: mad-configure
+.PHONY: mad-configure mad-configure-real
 mad-configure-real:
 	cd $(mad_TOP) ; \
 	touch NEWS AUTHORS ChangeLog ; \
@@ -24,12 +24,12 @@ mad-configure-real:
 	PKG_CONFIG_LIBDIR=$(CONFIGURE_PKG_CONFIG_LIBDIR) \
 	PKG_CONFIG_TOP_BUILD_DIR=/ \
 	$(mad_TOP)/configure --host=arm-linux-androideabi \
-	--prefix=/system
+	--prefix=/system ; \
+	for file in $(MAD_BUILT_SOURCES); do \
+		make -C $$(dirname $$file) $$(basename $$file) ; \
+	done
 
-$(ABS_MAD_BUILT_SOURCES):
-	make -C $$(dirname $@) $$(basename $@)
-
-mad-configure: mad-configure-real $(ABS_MAD_BUILT_SOURCES)
+mad-configure: mad-configure-real
 
 CONFIGURE_TARGETS += mad-configure
 
