@@ -8,7 +8,7 @@ mad_TOP := $(LOCAL_PATH)
 MAD_BUILT_SOURCES := 		\
 	libmad-Android.mk
 
-MAD_BUILT_SOURCES := $(patsubst %, $(mad_TOP)/%, $(MAD_BUILT_SOURCES))
+MAD_BUILT_SOURCES := $(patsubst %, $(abspath $(mad_TOP))/%, $(MAD_BUILT_SOURCES))
 
 .PHONY: mad-configure mad-configure-real
 mad-configure-real:
@@ -23,8 +23,8 @@ mad-configure-real:
 	CPPFLAGS="$(CONFIGURE_CPPFLAGS)" \
 	PKG_CONFIG_LIBDIR=$(CONFIGURE_PKG_CONFIG_LIBDIR) \
 	PKG_CONFIG_TOP_BUILD_DIR=/ \
-	$(mad_TOP)/configure --host=arm-linux-androideabi \
-	--prefix=/system ; \
+	$(abspath $(mad_TOP))/configure --host=arm-linux-androideabi \
+	--prefix=/system && \
 	for file in $(MAD_BUILT_SOURCES); do \
 		make -C $$(dirname $$file) $$(basename $$file) ; \
 	done
