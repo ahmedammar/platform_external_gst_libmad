@@ -142,7 +142,7 @@ again:
 libmad-Android.mk: Makefile.am mad.h
 	androgenizer \
 	-:PROJECT libmad -:SHARED libmad \
-	 -:TAGS eng \
+	 -:TAGS user \
          -:REL_TOP $(top_srcdir) -:ABS_TOP $(abs_top_srcdir) \
 	 -:SOURCES $(libmad_la_SOURCES) \
 	 	   $(EXTRA_libmad_la_SOURCES) \
