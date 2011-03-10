@@ -26,6 +26,7 @@ mad-configure-real:
 	$(abspath $(mad_TOP))/configure --host=arm-linux-androideabi \
 	--prefix=/system && \
 	for file in $(MAD_BUILT_SOURCES); do \
+		rm -f $$file && \
 		make -C $$(dirname $$file) $$(basename $$file) ; \
 	done
 
