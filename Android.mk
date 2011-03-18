@@ -11,7 +11,7 @@ MAD_BUILT_SOURCES := 		\
 MAD_BUILT_SOURCES := $(patsubst %, $(abspath $(mad_TOP))/%, $(MAD_BUILT_SOURCES))
 
 .PHONY: mad-configure mad-configure-real
-mad-configure-real:
+libmad-configure:
 	cd $(mad_TOP) ; \
 	touch NEWS AUTHORS ChangeLog ; \
 	autoreconf -i && \
@@ -30,8 +30,6 @@ mad-configure-real:
 		make -C $$(dirname $$file) $$(basename $$file) ; \
 	done
 
-mad-configure: mad-configure-real
-
-CONFIGURE_TARGETS += mad-configure
+CONFIGURE_TARGETS += libmad-configure
 
 -include $(mad_TOP)/libmad-Android.mk
