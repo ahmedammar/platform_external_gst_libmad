@@ -17,7 +17,7 @@ LIB := $(TARGET_OUT_SHARED_LIBRARIES)
 endif
 
 .PHONY: mad-configure mad-configure-real
-libmad-configure: $(TARGET_CRTBEGIN_DYNAMIC_O) $(TARGET_CRTEND_O) $(LIB)/libc.so $(LIB)/libz.so $(CONFIGURE_TARGETS) 
+libmad-configure: $(TARGET_CRTBEGIN_DYNAMIC_O) $(TARGET_CRTEND_O) $(LIB)/libc.so $(LIB)/libz.so
 	cd $(mad_TOP) ; \
 	touch NEWS AUTHORS ChangeLog ; \
 	autoreconf -i && \
