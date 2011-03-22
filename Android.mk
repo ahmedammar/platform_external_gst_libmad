@@ -10,8 +10,14 @@ MAD_BUILT_SOURCES := 		\
 
 MAD_BUILT_SOURCES := $(patsubst %, $(abspath $(mad_TOP))/%, $(MAD_BUILT_SOURCES))
 
+ifeq ($(NDK_BUILD),true)
+LIB := $(SYSROOT)/usr/lib
+else
+LIB := $(TARGET_OUT_SHARED_LIBRARIES)
+endif
+
 .PHONY: mad-configure mad-configure-real
-libmad-configure:
+libmad-configure: $(TARGET_CRTBEGIN_DYNAMIC_O) $(TARGET_CRTEND_O) $(LIB)/libc.so $(LIB)/libz.so $(CONFIGURE_TARGETS) 
 	cd $(mad_TOP) ; \
 	touch NEWS AUTHORS ChangeLog ; \
 	autoreconf -i && \
